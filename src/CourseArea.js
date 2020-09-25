@@ -1,4 +1,5 @@
 import React from 'react';
+import { Accordion } from 'react-bootstrap';
 import './App.css';
 import Course from './Course';
 
@@ -10,6 +11,7 @@ class CourseArea extends React.Component {
       courses.push (
         <Course key={course.name} data={course}/>
       )
+      console.log(course);
     }
 
     return courses;
@@ -18,7 +20,9 @@ class CourseArea extends React.Component {
   render() {
     return (
       <div style={{margin: '5px'}}>
+        <Accordion>
         {this.getCourses()}
+        </Accordion>
       </div>
     )
   }

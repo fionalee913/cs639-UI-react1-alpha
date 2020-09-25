@@ -54,10 +54,11 @@ class App extends React.Component {
             <Sidebar setCourses={(courses) => this.setCourses(courses)} courses={this.state.allCourses} subjects={this.state.subjects}/>
             <div style={{marginLeft: '20vw'}}>
               <CourseArea data={this.state.filteredCourses} allData={this.state.allCourses} cartMode={false}/>
+              
           </div>
           </Tab>
 
-          <Tab eventKey="cart" title="Cart" style={{paddingTop: '5vh'}}>
+          <Tab eventKey="cart" title="Cart" style={{paddingTop: '5vh'}} >
             <div style={{marginLeft: '5vw'}}>
               
             </div>
