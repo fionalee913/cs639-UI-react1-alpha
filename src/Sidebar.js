@@ -47,7 +47,7 @@ class Sidebar extends React.Component {
 
               <Form.Group controlId="formSubject">
                 <Form.Label>Subject</Form.Label>
-                <Form.Control as="select" ref={this.subject} onClick={() => this.setCourses()}>
+                <Form.Control as="select" ref={this.subject} onChange={() => this.setCourses()}>
                   {this.getSubjectOptions()}
                 </Form.Control>
               </Form.Group>

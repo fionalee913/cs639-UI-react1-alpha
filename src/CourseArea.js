@@ -11,7 +11,6 @@ class CourseArea extends React.Component {
       courses.push (
         <Course key={course.name} data={course}/>
       )
-      console.log(course);
     }
 
     return courses;
