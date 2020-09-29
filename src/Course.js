@@ -10,10 +10,11 @@ class Course extends React.Component {
 
     secData.forEach(section => {
       sections.push(
-        <Section key={section.number} data={section}/>
+        <Section key={section.number} data={section} addSections={(section) => this.addSections(section)}/>
       )
     }); 
 
+    //console.log(this.props.data);
     return sections;
   }
 
@@ -49,6 +50,17 @@ class Course extends React.Component {
     return requisites;
   }
 
+  addCourses() {
+    this.props.addCourses(this.props.data);
+  }
+
+  addSections(section) {
+    let curCourse = JSON.parse(JSON.stringify(this.props.data));
+		curCourse.sections = [section];
+    this.props.addCourses(curCourse);
+    console.log(this.props.data);
+  }
+
 
   render() {
     const courseName = this.props.data.name;
@@ -65,7 +77,9 @@ class Course extends React.Component {
               <div>
                 <h5>
                   Subject: {this.props.data.subject}
-                  <Button variant="secondary" size='sm' style={{ display:'inline-end', float: 'right', marginLeft: '10px'}}>Add Course</Button>
+                  <Button variant="secondary" size='sm' style={{ display:'inline-end', float: 'right', marginLeft: '10px'}} onClick={()=>this.addCourses()}>
+                    Add Course
+                  </Button>
                 </h5>
               </div>
               <div>

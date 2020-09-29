@@ -14,7 +14,7 @@ class Section extends React.Component {
 		//subSections.push();
 		subSecData.forEach(subSec => {
 			subSections.push(
-				<li style={{listStyleType: 'none'}} key={subSec.number}><Subsection data={subSec}/></li>
+				<li style={{listStyleType: 'none'}} key={subSec.number}><Subsection data={subSec} addSubsections={(subsection) => this.addSubsections(subsection)}/></li>
 			)
 		});
 
@@ -32,13 +32,27 @@ class Section extends React.Component {
 		return meetingTime;
 	}
 
+	addSections() {
+		this.props.addSections(this.props.data);
+	}
+
+	addSubsections(subsection) {
+		// wrap subsection with section info
+		let curSection = JSON.parse(JSON.stringify(this.props.data));
+		curSection.subsections = [subsection];
+		this.props.addSections(curSection);
+		console.log(this.props.data);
+	}
+
 	render() {
 		return (
 			<div>
 				<ul >
             		<li style={{fontSize: '18pt'}}>
 						{this.props.data.number}
-						<Button variant="primary" size='sm' style={{marginLeft: '10px', float: 'right'}}>Add Section</Button>
+						<Button variant="primary" size='sm' style={{marginLeft: '10px', float: 'right'}} onClick={()=>this.addSections()}>
+							Add Section
+						</Button>
 					</li>
             		<ul>
               			<li>Instructor: {this.props.data.instructor}</li>

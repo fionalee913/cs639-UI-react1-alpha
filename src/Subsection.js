@@ -15,13 +15,20 @@ class Subsection extends React.Component {
 		return meetingTime;
 	}
 	
+	addSubsections() {
+		this.props.addSubsections(this.props.data);
+		console.log(`add subsection:`);
+		console.log(this.props.data);
+	}
 
 	render() {
 		return (
 			<ul>
             	<li>
 					{this.props.data.number}
-					<Button variant="outline-primary" size='sm' style={{marginLeft: '10px', float: 'right'}}>Add Subsection</Button>
+					<Button variant="outline-primary" size='sm' style={{marginLeft: '10px', float: 'right'}} onClick={()=>this.addSubsections()}>
+						Add Subsection
+					</Button>
 				</li>
             	<ul>
               		<li>Location: {this.props.data.location}</li>
