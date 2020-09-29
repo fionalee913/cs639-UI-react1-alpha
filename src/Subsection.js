@@ -21,13 +21,18 @@ class Subsection extends React.Component {
 		console.log(this.props.data);
 	}
 
+	removeSubsections() {
+
+	}
+
 	render() {
 		return (
 			<ul>
             	<li>
 					{this.props.data.number}
-					<Button variant="outline-primary" size='sm' style={{marginLeft: '10px', float: 'right'}} onClick={()=>this.addSubsections()}>
-						Add Subsection
+					<Button variant="outline-primary" size='sm' style={{marginLeft: '10px', float: 'right'}} 
+						onClick={this.props.cartMode ? ()=>this.removeSubsections() : ()=>this.addSubsections()}>
+						{this.props.cartMode ? "Remove Subsection" : "Add Subsection"}
 					</Button>
 				</li>
             	<ul>

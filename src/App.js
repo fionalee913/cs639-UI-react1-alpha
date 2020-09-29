@@ -67,7 +67,7 @@ class App extends React.Component {
         courseExist = 1;
         if (added.sections.length > 1) { 
           // added object has all sections
-          course = added;
+          course.sections = added.sections;
           console.log(course);
           // can't replace???
         } else {
@@ -77,15 +77,14 @@ class App extends React.Component {
             if (sec.number === added.sections[0].number) {
               // if this section already exists
               sectionExist = 1;
-              if (added.sections[0].subsections.length > 1) {
-                // added object has all subsections of the section
-                sec = added.sections[0]; // add the whole section and all subsections
-
+              if (added.sections[0].subsections.length != 1) {
+                // added object has all subsections of the section or originally has no subsection
+                sec.subsections = added.sections[0].subsections; // add the whole section and all subsections
               } else {
-                // added object has only one subsection
+                // added object has only one subsection or does not have any subsection
                 if (sec.subsections.filter(subsec => subsec.number === added.sections[0].subsections[0].number).length <= 0) {
                   // if this subsection has never been added
-                  sec.subsections.push(added.sectoins[0].subsections[0]); // add the added subsection
+                  sec.subsections.push(added.sections[0].subsections[0]); // add the added subsection
 
                 }
               }

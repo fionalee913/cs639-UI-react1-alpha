@@ -10,7 +10,7 @@ class Course extends React.Component {
 
     secData.forEach(section => {
       sections.push(
-        <Section key={section.number} data={section} addSections={(section) => this.addSections(section)}/>
+        <Section key={section.number} data={section} cartMode={this.props.cartMode} addSections={(section) => this.addSections(section)}/>
       )
     }); 
 
@@ -54,9 +54,14 @@ class Course extends React.Component {
     this.props.addCourses(this.props.data);
   }
 
+  removeCourses() {
+
+  }
+
   addSections(section) {
     let curCourse = JSON.parse(JSON.stringify(this.props.data));
-		curCourse.sections = [section];
+    curCourse.sections = [];
+    curCourse.sections.push(section);
     this.props.addCourses(curCourse);
   //console.log(this.props.data);
   }
@@ -77,8 +82,9 @@ class Course extends React.Component {
               <div>
                 <h5>
                   Subject: {this.props.data.subject}
-                  <Button variant="secondary" size='sm' style={{ display:'inline-end', float: 'right', marginLeft: '10px'}} onClick={()=>this.addCourses()}>
-                    Add Course
+                  <Button variant="secondary" size='sm' style={{ display:'inline-end', float: 'right', marginLeft: '10px'}} 
+                    onClick={this.props.cartMode ? ()=>this.removeCourses() : ()=>this.addCourses()}>
+                    {this.props.cartMode ? "Remove Course" : "Add Course"}
                   </Button>
                 </h5>
               </div>

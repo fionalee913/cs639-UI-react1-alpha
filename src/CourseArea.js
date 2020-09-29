@@ -9,7 +9,7 @@ class CourseArea extends React.Component {
 
     for(const course of Object.values(this.props.data)) {
       courses.push (
-        <Course key={course.name} data={course} addCourses={(courses) => this.addCourses(courses)}/>
+        <Course key={course.name} data={course} cartMode={false} addCourses={(courses) => this.addCourses(courses)}/>
       )
     }
     console.log(courses);
@@ -18,9 +18,15 @@ class CourseArea extends React.Component {
 
   getAddedCourses() {
     // don't use getCourses, data is already type of object array
-    
-    //console.log(this.props.data);
-    return <p>hello world</p>;
+    let courses = [];
+
+    this.props.data.forEach(course => {
+      courses.push (
+        <Course key={course.name} data={course} cartMode={true}/>
+      )
+    });
+    console.log(courses);
+    return courses;
   }
 
   addCourses(courses) {
