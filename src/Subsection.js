@@ -21,7 +21,7 @@ class Subsection extends React.Component {
 			<ul>
             	<li>
 					{this.props.data.number}
-					<Button variant="outline-primary" size='sm' style={{marginLeft: '10px'}}>Add Subsection</Button>
+					<Button variant="outline-primary" size='sm' style={{marginLeft: '10px', float: 'right'}}>Add Subsection</Button>
 				</li>
             	<ul>
               		<li>Location: {this.props.data.location}</li>

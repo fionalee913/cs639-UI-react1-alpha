@@ -18,10 +18,13 @@ class SearchAndFilter {
         course.subject === subject
       );
     }
+    console.log(courses);
     // check search
     if (search != null && search !== "") {
       courses = courses.filter(course => 
-        course.name.toLowerCase().includes(search.toLowerCase())
+        course.keywords.filter(keyword => 
+          keyword.toLowerCase().includes(search.toLowerCase())
+        ).length > 0
       );
     }
 

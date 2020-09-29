@@ -11,10 +11,10 @@ class Section extends React.Component {
 		if(subSecData.length === 0){
 			return subSections;
 		}
-		subSections.push(<li key="Subsections" style={{listStyleType: 'none', fontSize: '18pt'}}>Subsections</li>);
+		//subSections.push();
 		subSecData.forEach(subSec => {
 			subSections.push(
-				<li key={subSec.number}><Subsection data={subSec}/></li>
+				<li style={{listStyleType: 'none'}} key={subSec.number}><Subsection data={subSec}/></li>
 			)
 		});
 
@@ -48,6 +48,7 @@ class Section extends React.Component {
 								{this.getTimes()}
               				</ul>
 					</ul>
+					{this.props.data.subsections.length > 0 ? <li key="Subsections" style={{listStyleType: 'none', fontSize: '18pt'}}>Subsections</li> : null}
 					<ul>
 						{this.getSubsections()}
 					</ul>

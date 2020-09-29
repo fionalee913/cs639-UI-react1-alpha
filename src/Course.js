@@ -57,18 +57,24 @@ class Course extends React.Component {
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey={courseName}>
             <h5 className="mb-0" style={{float: "left", verticalAlign: 'middle'}}>{this.props.data.number}: {courseName}</h5>
-            <Button variant="secondary" size='sm' style={{float: 'right', marginLeft: '10px'}}>Add Course</Button>
             <p style={{float: "right"}}>{this.props.data.credits} credits</p>
             
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={courseName}>
             <Card.Body>
-              <h5>Subject: {this.props.data.subject}</h5>
+              <div>
+                <h5>
+                  Subject: {this.props.data.subject}
+                  <Button variant="secondary" size='sm' style={{ display:'inline-end', float: 'right', marginLeft: '10px'}}>Add Course</Button>
+                </h5>
+              </div>
+              <div>
               <p>{this.props.data.description}</p>
               <p><strong>Requisites: </strong>
                 {this.getRequisites()}
               </p>
               <p>Keywords: {this.props.data.keywords.toString()}</p>
+              </div>
               <h5>Sections</h5>
               <div>{this.getSections()}</div>
             </Card.Body>
