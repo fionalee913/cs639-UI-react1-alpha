@@ -18,11 +18,9 @@ class CourseArea extends React.Component {
 
   getAddedCourses() {
     // don't use getCourses, data is already type of object array
-    // duplicate removal: take intersections
-    //    1. same course with diff sections/subsections
-    //    2. same course, same sections, diff subsections
-    //    3. same course, same sections, same subsections
-    console.log(this.props.data);
+    
+    //console.log(this.props.data);
+    return <p>hello world</p>;
   }
 
   addCourses(courses) {

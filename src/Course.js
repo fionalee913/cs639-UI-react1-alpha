@@ -58,7 +58,7 @@ class Course extends React.Component {
     let curCourse = JSON.parse(JSON.stringify(this.props.data));
 		curCourse.sections = [section];
     this.props.addCourses(curCourse);
-    console.log(this.props.data);
+  //console.log(this.props.data);
   }
 
 
