@@ -11,13 +11,12 @@ class Section extends React.Component {
 		if(subSecData.length === 0){
 			return subSections;
 		}
-		//subSections.push();
 		
 		subSecData.forEach(subSec => {
-			//console.log(subSec);
 			subSections.push(
 				<li style={{listStyleType: 'none'}} key={subSec.number}>
-					<Subsection data={subSec} cartMode={this.props.cartMode} addSubsections={(subsection) => this.addSubsections(subsection)}/>
+					{this.props.cartMode ? <Subsection data={subSec} cartMode={this.props.cartMode} removeSubsections={(subsection) => this.removeSubsections(subsection)}/>
+					 : <Subsection data={subSec} cartMode={this.props.cartMode} addSubsections={(subsection) => this.addSubsections(subsection)}/>}
 				</li>
 			)
 		});
@@ -39,11 +38,10 @@ class Section extends React.Component {
 	addSections() {
 		const curSection = JSON.parse(JSON.stringify(this.props.data));
 		this.props.addSections(curSection);
-		console.log(curSection);
 	}
 
 	removeSections() {
-
+		this.props.removeSections(this.props.data);
 	}
 
 	addSubsections(subsection) {
@@ -52,7 +50,14 @@ class Section extends React.Component {
 		curSection.subsections = [];
 		curSection.subsections.push(subsection);
 		this.props.addSections(curSection);
-		console.log(this.props.data);
+	}
+
+	
+	removeSubsections(subsection) {
+		let curSection = JSON.parse(JSON.stringify(this.props.data));
+		curSection.subsections = curSection.subsections.filter(subSec => subSec.number !== subsection.number);
+		this.props.data.subsections = curSection.subsections;
+		this.props.passData(this.props.data);
 	}
 
 	render() {

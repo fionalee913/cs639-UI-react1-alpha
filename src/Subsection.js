@@ -17,12 +17,10 @@ class Subsection extends React.Component {
 	
 	addSubsections() {
 		this.props.addSubsections(this.props.data);
-		console.log(`add subsection:`);
-		console.log(this.props.data);
 	}
 
 	removeSubsections() {
-
+		this.props.removeSubsections(this.props.data);
 	}
 
 	render() {

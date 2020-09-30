@@ -12,20 +12,21 @@ class CourseArea extends React.Component {
         <Course key={course.name} data={course} cartMode={false} addCourses={(courses) => this.addCourses(courses)}/>
       )
     }
-    console.log(courses);
+
     return courses;
   }
 
   getAddedCourses() {
-    // don't use getCourses, data is already type of object array
     let courses = [];
+    let data = this.props.data;
 
-    this.props.data.forEach(course => {
+    data.forEach(course => {
       courses.push (
-        <Course key={course.name} data={course} cartMode={true}/>
+        <Course key={course.name} data={course} cartMode={true} 
+          removeCourses={(courses)=>this.removeCourses(courses)} passData={(data)=>this.passData(data)}/>
       )
     });
-    console.log(courses);
+    
     return courses;
   }
 
@@ -33,6 +34,22 @@ class CourseArea extends React.Component {
     this.props.addCourses(courses);
   }
 
+  removeCourses(removed) {
+    var data = this.props.data.filter(course => course.number !== removed.number);
+    this.props.removeCourses(data);
+  }
+
+  passData(data) {
+    // replace original course in this.props.data with this course (data)
+    let courseArray = this.props.data;
+    courseArray.forEach(crs => {
+      if (crs.number === data.number) {
+        crs = data;
+      }
+    })
+    this.props.removeCourses(courseArray);
+  }
+  
   render() {
     return (
       this.props.cartMode ? (

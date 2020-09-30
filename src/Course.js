@@ -9,12 +9,15 @@ class Course extends React.Component {
     let sections = [];
 
     secData.forEach(section => {
+      {this.props.cartMode ? 
       sections.push(
+        <Section key={section.number} data={section} cartMode={this.props.cartMode} 
+          removeSections={(section) => this.removeSections(section)} passData={(data)=>this.passData(data)}/>)
+      : sections.push(
         <Section key={section.number} data={section} cartMode={this.props.cartMode} addSections={(section) => this.addSections(section)}/>
-      )
+      )}
     }); 
 
-    //console.log(this.props.data);
     return sections;
   }
 
@@ -55,15 +58,35 @@ class Course extends React.Component {
   }
 
   removeCourses() {
-
+    this.props.removeCourses(this.props.data);
   }
+
+  removeSections(removed) {
+    // remove that section of this course
+    var newSections = this.props.data.sections.filter(section => section.number !== removed.number);
+    // and then call this.passData(data)
+    let data = this.props.data;
+    data.sections = newSections;
+    this.props.passData(data);
+  }
+
+  passData(data) {
+    let curCourse = this.props.data;
+    curCourse.sections.forEach(sec => {
+      if (sec.number === data.number) {
+        sec.subsections = data.subsections;
+      }
+    })
+    this.props.data.sections = curCourse.sections;
+    this.props.passData(this.props.data);
+  }
+  
 
   addSections(section) {
     let curCourse = JSON.parse(JSON.stringify(this.props.data));
     curCourse.sections = [];
     curCourse.sections.push(section);
     this.props.addCourses(curCourse);
-  //console.log(this.props.data);
   }
 
 
@@ -75,7 +98,6 @@ class Course extends React.Component {
           <Accordion.Toggle as={Card.Header} eventKey={courseName}>
             <h5 className="mb-0" style={{float: "left", verticalAlign: 'middle'}}>{this.props.data.number}: {courseName}</h5>
             <p style={{float: "right"}}>{this.props.data.credits} credits</p>
-            
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={courseName}>
             <Card.Body>
@@ -95,7 +117,7 @@ class Course extends React.Component {
               </p>
               <p>Keywords: {this.props.data.keywords.toString()}</p>
               </div>
-              <h5>Sections</h5>
+              {this.props.data.sections.length > 0 ? <h5>Sections</h5> : null}
               <div>{this.getSections()}</div>
             </Card.Body>
           </Accordion.Collapse>
