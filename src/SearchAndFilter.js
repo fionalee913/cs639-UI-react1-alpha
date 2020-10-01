@@ -18,7 +18,6 @@ class SearchAndFilter {
         course.subject === subject
       );
     }
-    console.log(courses);
     // check search
     if (search != null && search !== "") {
       courses = courses.filter(course => 

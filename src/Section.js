@@ -80,9 +80,9 @@ class Section extends React.Component {
               				</ul>
 					</ul>
 					{this.props.data.subsections.length > 0 ? <li key="Subsections" style={{listStyleType: 'none', fontSize: '18pt'}}>Subsections</li> : null}
-					<ul>
+					<div>
 						{this.getSubsections()}
-					</ul>
+					</div>
 				</ul>
 			</div>
 		)
